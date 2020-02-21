@@ -1,0 +1,35 @@
+{
+  "name": "notification-with-fallback",
+  "version": "1.0.0",
+  "description": "HTML5 Notification with a fallback scheme",
+  "main": "lib/index.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -f lib/index.min.js && rollup -c",
+    "serve": "rm -f lib/index.min.js && rollup -c rollup.config.serve.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shaodeqi/notification-with-fallback.git"
+  },
+  "keywords": [
+    "notification",
+    "fallback",
+    "HTML5"
+  ],
+  "author": "shaodeqi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shaodeqi/notification-with-fallback/issues"
+  },
+  "homepage": "https://github.com/shaodeqi/notification-with-fallback#readme",
+  "devDependencies": {
+    "rollup": "^1.10.1",
+    "rollup-plugin-node-resolve": "^4.2.3",
+    "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-typescript": "^1.0.1",
+    "rollup-plugin-uglify": "^6.0.2",
+    "tslib": "^1.9.3",
+    "typescript": "^3.4.5"
+  }
+}

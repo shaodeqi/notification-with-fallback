@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>notification-with-fallback</title>
+    <link rel="shortcut icon" href="./notification.png"/>
+    <script src="./index.min.js"></script>
+</head>
+<body>
+    <button id="btn_notification">Notification</button>
+    <button id="btn_notification_fallback">fallbackForce</button>
+    <button id="btn_notification_fallback_nofallback">noFallbackWhenDenied</button>
+    <button id="btn_notification_timeout">Notification was clicked nofocus after 5 seconds</button>
+    <button id="btn_notification_timeout_nofocus">Notification was clicked focus after 5 seconds</button>
+    <script>
+        let notify = function (options) {
+            var no = new WebNotification('提示', {
+                body: '此消息来自WebNotification',
+                icon: './notification.png',
+                sound: './voice.mp3',
+                backupTemplate: 'title--body',
+                ...options
+            });
+            no.onclick = function (e) {
+                console.log('onclick: WebNotification', e);
+            }
+            no.onshow = function () {                
+                console.log('onshow: WebNotification', no.isDenied);
+            }
+            no.onclose = function () {
+                console.log('onclose: WebNotification');
+            }
+        };
+        document.querySelector('#btn_notification').onclick = function () {
+            notify({
+                pauseSoundOnClick: true
+            })
+        };
+        document.querySelector('#btn_notification_fallback').onclick = function () {
+            notify({
+                fallbackForce: true,
+                pauseSoundOnClick: true,
+                fallbackDelay: 100
+            })
+        };
+        document.querySelector('#btn_notification_fallback_nofallback').onclick = function () {
+            let a = notify({
+                fallbackWhenDenied: false
+            })
+        };
+        document.querySelector('#btn_notification_timeout').onclick = function () {
+            setTimeout(notify, 5000);
+        };
+        document.querySelector('#btn_notification_timeout_nofocus').onclick = function () {
+            setTimeout(function () {
+                notify({
+                    focusOnClick: false,
+                    pauseSoundOnClick: true
+                })
+            }, 5000);
+        };
+    </script>
+</body>
+</html>
